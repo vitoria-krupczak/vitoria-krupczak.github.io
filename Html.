@@ -1,0 +1,106 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Crie seu Portfólio Online</h1>
+<form id="portfolioForm">
+    <label for="areaAtuacao">Área de Atuação:</label>
+    <input type="text" id="areaAtuacao" required>
+
+    <label for="tempoCarreira">Tempo de Carreira:</label>
+    <input type="text" id="tempoCarreira" required>
+
+    <label for="experiencias">Experiências:</label>
+    <textarea id="experiencias" rows="4" required></textarea>
+
+    <label for="biografia">Biografia:</label>
+    <textarea id="biografia" rows="4" required></textarea>
+
+    <label for="informacoesContato">Informações de Contato:</label>
+    <input type="text" id="informacoesContato" required>
+
+    <label for="processoCriativo">Processo Criativo:</label>
+    <textarea id="processoCriativo" rows="4" required></textarea>
+
+    <button type="button" onclick="gerarPortfolio()">Gerar Portfólio</button>
+</form>
+
+<script>
+function gerarPortfolio() {
+    const areaAtuacao = document.getElementById('areaAtuacao').value;
+    const tempoCarreira = document.getElementById('tempoCarreira').value;
+    const experiencias = document.getElementById('experiencias').value;
+    const biografia = document.getElementById('biografia').value;
+    const informacoesContato = document.getElementById('informacoesContato').value;
+    const processoCriativo = document.getElementById('processoCriativo').value;
+
+    const portfolioConteudo = `
+        Área de Atuação: ${areaAtuacao}\n
+        Tempo de Carreira: ${tempoCarreira}\n
+        Experiências:\n${experiencias}\n
+        Biografia:\n${biografia}\n
+        Informações de Contato:\n${informacoesContato}\n
+        Processo Criativo:\n${processoCriativo}
+    `;
+
+    const blob = new Blob([portfolioConteudo], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'portfolio.txt';
+    
+    document.body.appendChild(a);
+    a.click();
+    
+    setTimeout(() => {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);  
+    }, 0);
+}
+</script>
+
+</body>
+</html>
+```
